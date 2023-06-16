@@ -26,7 +26,6 @@ def pre_process(image):
     como o operador de Sobel ou o algoritmo de Canny, para identificar
     as bordas das moedas na imagem pré-processada.
 '''
-
 def edge_detection(image):
     # Aplica o algoritmo de Canny para detectar as bordas
     edges_canny = cv2.Canny(image, 50, 150)
@@ -60,7 +59,6 @@ def coin_segmentation(edges):
 def feature_extraction():
     pass
 
-
 '''
     Com base nas características extraídas,
     é criado um modelo de classificação capaz de identificar as moedas.
@@ -93,7 +91,6 @@ def coin_counter(segmented_image):
 
     return num_coins
 
-
 ''' 
     Os resultados da contagem das moedas são apresentados
     na imagem original ou em uma nova imagem, destacando
@@ -124,11 +121,9 @@ cv2.imshow("segmented_image", segmented_image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-
 # feature_extraction()
 
 # coin_classification()
-
 
 num_coins = coin_counter(segmented_image)
 
