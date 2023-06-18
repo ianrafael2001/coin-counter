@@ -1,24 +1,47 @@
-# coin-counter
-# Algoritmo de Contagem de Moedas usando Processamento de Imagem
+# Contador de Moedas
 
-Este repositório contém um algoritmo desenvolvido para realizar a contagem de moedas em imagens por meio de técnicas avançadas de processamento de imagem. O algoritmo segue um conjunto de passos básicos para realizar a tarefa de forma eficiente e precisa.
+Este é um código que utiliza técnicas de processamento de imagem e aprendizado de máquina para realizar a contagem e classificação de moedas em uma imagem ou vídeo capturado pela câmera.
 
-Passos básicos do algoritmo:
+## Descrição do problema
+
+O objetivo desse código é automatizar a contagem de moedas em uma imagem ou vídeo, bem como identificar o valor das moedas encontradas. Essa funcionalidade pode ser útil em várias aplicações, como caixas registradoras automáticas, sistemas de pagamento automatizados, sistemas de controle de estoque, entre outros.
+
+## Descrição da base de dados e/ou das imagens
+
+Esse código não depende de uma base de dados prévia. Ele utiliza técnicas de processamento de imagem para segmentar e extrair características das moedas presentes na imagem ou vídeo fornecido.
+
+## Descrição do método utilizado
+
+O código utiliza os seguintes passos para realizar a contagem e classificação de moedas:
 
 1. Pré-processamento da imagem: Aplica técnicas de melhoria de qualidade da imagem, como redimensionamento, correção de iluminação e filtragem de ruído, visando obter uma imagem mais adequada para a detecção das moedas.
 
-2. Detecção de bordas: Utiliza algoritmos de detecção de bordas, como o operador de Sobel ou o algoritmo de Canny, para identificar as bordas das moedas na imagem pré-processada.
+2. Detecção de bordas: Utiliza algoritmos de detecção de bordas, como o algoritmo de Canny, para identificar as bordas das moedas na imagem pré-processada.
 
-3. Segmentação das moedas: Com base nas bordas detectadas, são aplicados algoritmos de segmentação para separar as moedas do plano de fundo. Essa etapa utiliza técnicas de limiarização ou segmentação baseada em regiões.
+3. Segmentação das moedas: Com base nas bordas detectadas, aplica algoritmos de segmentação para separar as moedas do plano de fundo. Isso pode ser feito usando técnicas de limiarização ou segmentação baseada em regiões.
 
-4. Extração de características: Calcula características relevantes das moedas segmentadas, como diâmetro, área ou perímetro. Essas características são utilizadas para distinguir as diferentes moedas.
+4. Classificação das moedas: Com base nas características extraídas, foi criado um modelo de classificação capaz de identificar as moedas. Neste código, é utilizado um modelo de classificação carregado a partir de um arquivo (Keras_model.h5) e a biblioteca Keras.
 
-5. Classificação das moedas: Com base nas características extraídas, é criado um modelo de classificação capaz de identificar as moedas. Essa etapa utiliza técnicas como classificação por máquina de vetores de suporte (SVM), árvores de decisão ou redes neurais.
+5. Contagem e exibição dos resultados: Os resultados da contagem das moedas são apresentados na imagem original ou em uma nova imagem, destacando as moedas identificadas. Além da contagem, é exibida a classe (valor) e a porcentagem de confiança da classificação para cada moeda identificada.
 
-6. Contagem das moedas: O modelo de classificação é aplicado para classificar cada moeda e contar quantas vezes cada classe de moeda aparece na imagem.
+## Documentação geral do código
 
-7. Exibição dos resultados: Os resultados da contagem das moedas são apresentados na imagem original ou em uma nova imagem, destacando as moedas identificadas.
+O código está estruturado da seguinte forma:
 
-É importante ressaltar que o sucesso do algoritmo depende da qualidade das imagens de entrada, das técnicas de pré-processamento selecionadas, bem como da eficácia da segmentação e classificação das moedas. Além disso, é necessário treinar o modelo de classificação com um conjunto de dados rotulados para que ele possa reconhecer corretamente as diferentes moedas.
+- Função `pre_process(image)`: Aplica técnicas de melhoria de qualidade da imagem, como correção de iluminação e filtragem de ruído, para preparar a imagem para detecção de bordas.
 
-Esperamos que este repositório seja útil para você iniciar o desenvolvimento do seu algoritmo de contagem de moedas usando processamento de imagem!
+- Função `edge_detection(image)`: Utiliza o algoritmo de Canny para detectar as bordas nas moedas presentes na imagem.
+
+- Função `coin_segmentation(edges)`: Realiza a segmentação das moedas com base nas bordas detectadas, utilizando técnicas de limiarização e segmentação baseada em regiões.
+
+- Função `coin_classification(coin_image)`: Realiza a classificação das moedas com base nas características extraídas. Utiliza um modelo de classificação carregado a partir de um arquivo (Keras_model.h5) e
+
+ a biblioteca Keras.
+
+- Função `show_result()`: Captura imagens da câmera em tempo real e aplica os passos de pré-processamento, detecção de bordas, segmentação e classificação das moedas. Os resultados são exibidos na imagem original ou em uma nova imagem, destacando as moedas identificadas e apresentando a contagem, a classe e a porcentagem de confiança da classificação para cada moeda.
+
+- Função `filterByArea(cnt)`: Função auxiliar para filtrar os contornos das moedas com base em sua área.
+
+Para executar o código, basta chamar a função `show_result()`. Certifique-se de ter o arquivo `Keras_model.h5` presente no mesmo diretório do código para carregar o modelo de classificação.
+
+Observação: É necessário ter as bibliotecas OpenCV, NumPy e Keras instaladas para executar o código corretamente.

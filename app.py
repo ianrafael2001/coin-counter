@@ -26,9 +26,8 @@ def pre_process(image):
     return denoised_image
 
 '''
-    Utiliza algoritmos de detecção de bordas, 
-    como o operador de Sobel ou o algoritmo de Canny, para identificar
-    as bordas das moedas na imagem pré-processada.
+    Utiliza algoritmos de detecção de bordas, o algoritmo de Canny, 
+    para identificar as bordas das moedas na imagem pré-processada.
 '''
 def edge_detection(image):
     # Aplica o algoritmo de Canny para detectar as bordas
@@ -37,11 +36,11 @@ def edge_detection(image):
     return edges_canny
 
 '''
-    algoritmos de detecção de bordas, como o operador de Sobel 
-    ou o algoritmo de Canny, para identificar as bordas das moedas 
-    na imagem pré-processada.
+    Com base nas bordas detectadas, aplique algoritmos de segmentação 
+    para separar as moedas do plano de fundo. Isso pode ser feito usando 
+    técnicas de limiarização ou segmentação baseada em regiões.
 '''
-def coin_segmentation(edges):    
+def coin_segmentation(edges):
     # Aplica a limiarização para segmentar as moedas
     _, threshold = cv2.threshold(edges, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
@@ -50,25 +49,19 @@ def coin_segmentation(edges):
 
     # Cria uma máscara para destacar as moedas
     mask = cv2.drawContours(np.zeros_like(edges), contours, -1, (255), thickness=cv2.FILLED)
-    
-    kernel = create_circular_kernel(5)
-    mask = cv2.dilate(mask,kernel,iterations=5)
-    segmented_image = cv2.erode(mask,kernel,iterations=5)
-    return segmented_image
 
-'''
-    Calcula características relevantes das moedas segmentadas,
-    como diâmetro, área ou perímetro. Essas características
-    são utilizadas para distinguir as diferentes moedas.
-'''
-def feature_extraction():
-    pass
+    kernel = np.ones((5, 5), np.uint8)
+    mask = cv2.dilate(mask, kernel, iterations=6)
+    segmented_image = cv2.erode(mask, kernel, iterations=5)
+
+    return segmented_image
 
 '''
     Com base nas características extraídas,
     é criado um modelo de classificação capaz de identificar as moedas.
     Essa etapa utiliza técnicas como classificação por máquina de vetores
     de suporte (SVM), árvores de decisão ou redes neurais.
+    # Base função pega no repositorio: https://github.com/WellingtonDev25/contagemMoedas
 '''
 def coin_classification(coin_image):
     coin_image = cv2.resize(coin_image,(224,224))
@@ -127,19 +120,6 @@ def show_result():
         cv2.imshow('Imagem seguimentada', coins_image)
         cv2.waitKey(1)
         pass
-
-def create_circular_kernel(radius):
-    diameter = 2 * radius + 1
-    kernel = np.zeros((diameter, diameter), dtype=np.uint8)
-    center = (radius, radius)
-
-    for i in range(diameter):
-        for j in range(diameter):
-            distance = np.sqrt((i - center[0]) ** 2 + (j - center[1]) ** 2)
-            if distance <= radius:
-                kernel[i, j] = 1
-
-    return kernel
 
 def filterByArea(cnt):
    area = cv2.contourArea(cnt)
