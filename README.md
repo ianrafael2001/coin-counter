@@ -34,9 +34,7 @@ O código está estruturado da seguinte forma:
 
 - Função `coin_segmentation(edges)`: Realiza a segmentação das moedas com base nas bordas detectadas, utilizando técnicas de limiarização e segmentação baseada em regiões.
 
-- Função `coin_classification(coin_image)`: Realiza a classificação das moedas com base nas características extraídas. Utiliza um modelo de classificação carregado a partir de um arquivo (Keras_model.h5) e
-
- a biblioteca Keras.
+- Função `coin_classification(coin_image)`: Realiza a classificação das moedas com base nas características extraídas. Utiliza um modelo de classificação carregado a partir de um arquivo (Keras_model.h5) e a biblioteca Keras.
 
 - Função `show_result()`: Captura imagens da câmera em tempo real e aplica os passos de pré-processamento, detecção de bordas, segmentação e classificação das moedas. Os resultados são exibidos na imagem original ou em uma nova imagem, destacando as moedas identificadas e apresentando a contagem, a classe e a porcentagem de confiança da classificação para cada moeda.
 
