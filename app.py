@@ -50,9 +50,9 @@ def coin_segmentation(edges):
     # Cria uma máscara para destacar as moedas
     mask = cv2.drawContours(np.zeros_like(edges), contours, -1, (255), thickness=cv2.FILLED)
 
-    kernel = np.ones((5, 5), np.uint8)
-    mask = cv2.dilate(mask, kernel, iterations=6)
-    segmented_image = cv2.erode(mask, kernel, iterations=5)
+    kernel = np.ones((3, 3), np.uint8)
+    mask = cv2.dilate(mask, kernel, iterations=3)
+    segmented_image = cv2.erode(mask, kernel, iterations=2)
 
     return segmented_image
 
@@ -84,6 +84,7 @@ def show_result():
     while True:
         _,image = video.read()
         image = cv2.resize(image,(640,480))
+        image_original = image
         preprocessed_image = pre_process(image)
         edges_canny = edge_detection(preprocessed_image)
         segmented_image = coin_segmentation(edges_canny)
@@ -106,7 +107,7 @@ def show_result():
         for cnt in contoursFilter:
             x,y,w,h = cv2.boundingRect(cnt)
             cv2.rectangle(image,(x,y),(x+w,y+h),(0,255,0),2)
-            recorte = image[y:y +h,x:x+ w]
+            recorte = image_original[y:y +h,x:x+ w]
             
             # faz a classificação da moeda
             classe, accuracy = coin_classification(recorte)
@@ -116,13 +117,15 @@ def show_result():
             cv2.putText(image,str(classe),(x,y-10),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
             cv2.putText(image,f'{int(accuracy_form*100)}%',(x ,y - 25),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,0),2)
                 
-        cv2.imshow('Imagem Original',image)
-        cv2.imshow('Imagem seguimentada', coins_image)
+        cv2.imshow('Imagem resultado',image)
+        cv2.imshow('Imagem Pre-Processada', preprocessed_image)
+        cv2.imshow('Imagem da borda', edges_canny)
+        cv2.imshow('Imagem segmentada',segmented_image)
         cv2.waitKey(1)
         pass
 
 def filterByArea(cnt):
    area = cv2.contourArea(cnt)
-   return area > 1000
+   return area > 2000
 
 show_result()
