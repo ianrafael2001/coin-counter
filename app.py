@@ -15,13 +15,9 @@ classes = ["1 real","25 centavos","50 centavos"]
     visando obter uma imagem mais adequada para a detecção das moedas.
 '''
 def pre_process(image):
-    # Correção de iluminação
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    enhanced_image = clahe.apply(gray_image)
-
     # Filtragem de ruído
-    denoised_image = cv2.fastNlMeansDenoising(enhanced_image, h=10)
+    denoised_image = cv2.fastNlMeansDenoising(gray_image, h=10)
 
     return denoised_image
 
