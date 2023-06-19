@@ -1,9 +1,10 @@
 # Contador de Moedas
 
 Por:
-Bernardo Ragonezi Silva Lopes
-Ian Rafael de Souza Oliveira
-Pedro Henrique Ramos Loura
+ - Bernardo Ragonezi Silva Lopes
+ - Ian Rafael de Souza Oliveira
+ - Pedro Henrique Ramos Loura
+
 
 Este é um código que utiliza técnicas de processamento de imagem e aprendizado de máquina para realizar a contagem e classificação de moedas em uma imagem ou vídeo capturado pela câmera.
 
