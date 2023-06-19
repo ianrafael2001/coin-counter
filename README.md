@@ -4,6 +4,7 @@ Por:
  - Bernardo Ragonezi Silva Lopes
  - Ian Rafael de Souza Oliveira
  - Pedro Henrique Ramos Loura
+
 Professor:
  - Felipe Augusto Lima Reis
 
