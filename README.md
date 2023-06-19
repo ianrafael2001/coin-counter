@@ -13,7 +13,9 @@ A base de dados utilizada, foi uma base disponilizada no git: https://github.com
 Foi disponibilizada 654 imagens para treinamento:
  - 25 centavos: 244 imagens
  - 50 centavos: 198 imagens
- - 1 real: 212 imagens 
+ - 1 real: 212 imagens
+
+O modelo e as imagens estão disponibilizado nos arquivos do repositório.
 
 ## Descrição do método utilizado
 
