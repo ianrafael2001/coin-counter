@@ -8,7 +8,12 @@ O objetivo desse código é automatizar a contagem de moedas em uma imagem ou v�
 
 ## Descrição da base de dados e/ou das imagens
 
-Esse código não depende de uma base de dados prévia. Ele utiliza técnicas de processamento de imagem para segmentar e extrair características das moedas presentes na imagem ou vídeo fornecido.
+A base de dados utilizada, foi uma base disponilizada no git: https://github.com/WellingtonDev25/contagemMoedas, o modelo foi treinado na ferramenta teachablemachine (https://teachablemachine.withgoogle.com/). Ele utiliza técnicas de processamento de imagem para segmentar e extrair características das moedas presentes na imagem.
+
+Foi disponibilizada 654 imagens para treinamento:
+ - 25 centavos: 244 imagens
+ - 50 centavos: 198 imagens
+ - 1 real: 212 imagens 
 
 ## Descrição do método utilizado
 
